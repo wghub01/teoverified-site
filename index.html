@@ -1791,17 +1791,13 @@
     .mock-cover {
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, rgba(6,56,85,0.08) 0%, rgba(6,56,85,0.04) 100%);
+      background:
+        linear-gradient(180deg, transparent 60%, rgba(6,56,85,0.18) 100%),
+        url("https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=1200&q=85") center/cover no-repeat,
+        rgba(6,56,85,0.08);
       border-radius: 8px;
       position: relative;
       overflow: hidden;
-    }
-    .mock-cover::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg aria-hidden="true" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='none'/><path d='M15 75 L35 50 L52 65 L72 38 L85 52 L85 82 L15 82 Z' fill='rgba(6,56,85,0.07)'/><circle cx='75' cy='28' r='5' fill='rgba(6,56,85,0.1)'/></svg>");
-      background-size: cover;
     }
 
     /* Verification zone embedded in the listing page */

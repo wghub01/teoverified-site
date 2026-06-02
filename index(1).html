@@ -1,0 +1,3824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeoVerified — Show what your stay actually delivers.</title>
+  <meta name="description" content="Independent verification of internet, workspace, and comfort amenities — embedded on your direct-booking listing. Show guests what your stay actually delivers.">
+  <meta name="theme-color" content="#f6f3ec">
+
+  <!-- Canonical URL — single source of truth for search engines.
+       Update this if you change your production domain. -->
+  <link rel="canonical" href="https://teoverified.com/">
+
+  <!-- OG image — must be a real, publicly-accessible URL once deployed.
+       Recommended size: 1200×630px. PNG or JPG. TODO: upload your og.png to /public. -->
+  <meta property="og:image" content="https://teoverified.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TeoVerified — Show what your stay actually delivers.">
+  <meta name="twitter:image" content="https://teoverified.com/og.png">
+  <meta name="twitter:image:alt" content="TeoVerified — Show what your stay actually delivers.">
+  <meta name="color-scheme" content="light">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TeoVerified — Show what your stay actually delivers.">
+  <meta property="og:description" content="Does your stay actually give guests a place to work? With the amenities they rely on — internet, workspace, comfort? Independent verification, embedded on your listing.">
+  <meta property="og:site_name" content="TeoVerified">
+  <meta property="og:url" content="https://teoverified.com/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TeoVerified — Show what your stay actually delivers.">
+  <meta name="twitter:description" content="Does your stay actually give guests a place to work? With the amenities they rely on — internet, workspace, comfort? Independent verification, embedded on your listing.">
+
+  <!-- Inline SVG favicon: brand teal-on-navy disc -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23063855'/%3E%3Cpath d='M20 33.5l8 8 17-17' stroke='%230088a1' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Site palette — warm light, brand-aligned navy + teal */
+      --bg:           #f6f3ec;
+      --bg-2:         #efeae0;
+      --paper:        #fbfaf5;       /* warm near-white card surface */
+      --ink:          #063855;       /* brand navy from logo */
+      --ink-2:        #1a4a66;
+      --muted:        #6b7d8a;
+      --subtle:       #9aacb8;
+      --line:         rgba(6,56,85,0.10);
+      --line-2:       rgba(6,56,85,0.16);
+      --accent:       #0088a1;       /* brand teal from logo */
+      --accent-2:     #00a3bf;
+
+      /* Badge palette — preserved */
+      --badge-bg:     #0c1220;
+      --badge-surf:   #111827;
+      --badge-surf-2: #1a2540;
+      --badge-line:   rgba(255,255,255,0.07);
+      --badge-line-2: rgba(255,255,255,0.12);
+      --badge-text:   #f1f5f9;
+      --badge-mute:   #94a3b8;
+      --badge-sub:    #4b5563;
+      --tier-power:   #34d399;
+      --tier-office:  #2dd4bf;
+      --tier-flex:    #818cf8;
+      --tier-lite:    #a78bfa;
+      --success:      #34d399;
+      --teo-host:     #0ea5e9;       /* RESERVED · "reported by host" attribution */
+
+      --shadow-card:  0 2px 4px rgba(12,18,32,0.04), 0 12px 36px -12px rgba(12,18,32,0.12);
+      --shadow-badge: 0 8px 24px -8px rgba(12,18,32,0.18), 0 32px 80px -24px rgba(12,18,32,0.28);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Geist', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: clip;
+    }
+
+    /* Skip-to-content link: invisible until a keyboard user tabs to it.
+       Hidden via clip-path so it stays in the accessibility tree (screen readers
+       still announce it), but doesn't take visual space until focused. */
+    .skip-to-content {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 12px 20px;
+      background: var(--ink);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 999px;
+      z-index: 1000;
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .skip-to-content:focus,
+    .skip-to-content:focus-visible {
+      clip: auto;
+      clip-path: none;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Subtle paper grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml;utf8,<svg aria-hidden="true" xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.07 0 0 0 0 0.12 0 0 0 0.025 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─────────────────────────────── NAV ─────────────────────────────── */
+    nav.site-nav {
+      padding: 28px 0;
+      position: relative;
+      z-index: 10;
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-mark {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+    }
+    .brand-wordmark {
+      font-family: 'Geist', sans-serif;
+      font-size: 26px;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .bw-prefix { font-weight: 600; color: var(--accent); }
+    .bw-suffix { font-weight: 600; color: var(--ink); }
+    .bw-dot { font-weight: 600; color: var(--accent); margin-left: 1px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--ink-2);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: #1a2540; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line-2);
+    }
+    .btn-ghost:hover { border-color: var(--ink); }
+
+    /* ─────────────────────────────── HERO ─────────────────────────────── */
+    .hero {
+      padding: 80px 0 48px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: 80px;
+      align-items: center;
+    }
+    .hero-text-col {
+      padding-right: 8px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 3px rgba(52,211,153,0.2);
+    }
+    .hero-eyebrow-sep {
+      color: var(--subtle);
+      margin: 0 4px;
+      font-weight: 400;
+    }
+    .hero-eyebrow-pat {
+      font-family: 'Geist Mono', monospace;
+      font-weight: 500;
+      color: var(--ink-2);
+      letter-spacing: 0.1em;
+    }
+    .hero h1 {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: clamp(44px, 5.6vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-link-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink-2);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 11px 8px;
+    }
+    .hero-link-arrow:hover { color: var(--accent); }
+    .hero-link-arrow svg {
+      transition: transform 0.18s ease;
+    }
+    .hero-link-arrow:hover svg { transform: translateX(3px); }
+
+    /* Listing mockup — oversized, bleeds past container right edge */
+    .listing-frame {
+      position: relative;
+      margin-right: -64px;
+    }
+    .listing-frame::before {
+      content: '';
+      position: absolute;
+      inset: -48px -32px -56px -32px;
+      background:
+        radial-gradient(ellipse 70% 55% at 60% 60%, rgba(12,18,32,0.08) 0%, transparent 65%);
+      z-index: 0;
+      filter: blur(20px);
+    }
+    .listing-card {
+      position: relative;
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 8px rgba(12,18,32,0.04),
+        0 24px 48px -12px rgba(12,18,32,0.16),
+        0 60px 120px -32px rgba(12,18,32,0.22);
+      border: 1px solid var(--line);
+      z-index: 1;
+    }
+    .listing-photo {
+      aspect-ratio: 5/4;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #d4c4a8 0%, #c79e7c 100%);
+    }
+    .listing-photo-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .listing-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(12,18,32,0.18) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .listing-photo-tag {
+      position: absolute;
+      top: 18px; left: 18px;
+      background: rgba(12,18,32,0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 13px;
+      border-radius: 9999px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .listing-photo-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+    .listing-body {
+      padding: 26px 28px 28px;
+    }
+    .listing-meta {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 4px;
+    }
+    .listing-name {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .listing-price {
+      font-family: 'Geist Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .listing-price em {
+      font-style: normal;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .listing-loc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .listing-stars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--ink-2);
+      margin-bottom: 16px;
+    }
+    .listing-stars-num { font-weight: 600; }
+    .listing-stars-count { color: var(--muted); }
+
+    /* Compact pill for listing context — shrinks to content width, can bleed out right edge only */
+    .pill {
+      display: flex;
+      align-items: stretch;
+      width: max-content;
+      max-width: calc(100% + 28px);
+      margin-right: -28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--badge-line-2);
+      background: var(--badge-bg);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px -4px rgba(12,18,32,0.4);
+    }
+    .pill:hover {
+      transform: translateY(-1px);
+      border-color: rgba(0,136,161,0.4);
+      box-shadow: 0 8px 20px -6px rgba(12,18,32,0.5);
+    }
+    .pill:hover .p-chevron { color: var(--success); }
+    .pill:hover .p-chevron svg { transform: translateY(2px); }
+    .p-chevron {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 14px;
+      color: rgba(255,255,255,0.4);
+      flex-shrink: 0;
+      align-self: stretch;
+      transition: color 0.2s ease;
+    }
+    .p-chevron svg {
+      width: 14px; height: 14px;
+      transition: transform 0.2s ease;
+    }
+    .p-sep {
+      width: 1px;
+      background: var(--badge-line-2);
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+    .p-brand {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 18px;
+      flex-shrink: 0;
+    }
+    .p-brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      line-height: 1;
+    }
+    .p-name {
+      font-family: 'Geist', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.01em;
+    }
+    .p-sub {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--success);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .p-conn {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+    .p-conn-inner { display: flex; flex-direction: column; gap: 1px; }
+    .p-col-label {
+      font-size: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--badge-sub);
+      line-height: 1;
+    }
+    .p-speed-row { display: flex; align-items: center; gap: 6px; }
+    .p-speed-val {
+      font-family: 'Geist Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--badge-text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .p-speed-unit {
+      font-size: 10px;
+      color: var(--badge-mute);
+    }
+    .tier-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 9px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tier-chip.power  { background: var(--tier-power);  color: #0f172a; }
+    .tier-chip.office { background: var(--tier-office); color: #0f172a; }
+    .tier-chip.flex   { background: var(--tier-flex);   color: white;   }
+    .tier-chip.lite   { background: var(--tier-lite);   color: white;   }
+
+    .p-tested-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .p-tested-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--tier-power);
+      box-shadow: 0 0 5px var(--tier-power);
+    }
+    .p-tested-txt {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--badge-sub);
+      white-space: nowrap;
+    }
+    .p-amenities {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 0 18px;
+      align-self: stretch;
+      min-width: 0;
+    }
+    .p-amenities-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .p-icons-row { display: flex; align-items: center; gap: 5px; }
+    .p-ico {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+    .p-ico svg { width: 13px; height: 13px; }
+    .p-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      height: 24px;
+      border-radius: 9999px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.2);
+      font-size: 8.5px;
+      font-weight: 700;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* Floating helper hint — serif label with elbow rule turning up at the pill */
+    .pill-hint {
+      position: absolute;
+      bottom: -42px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+      animation: hint-fade 2.4s ease-in-out infinite;
+    }
+    .pill-hint-text {
+      font-family: 'Newsreader', serif;
+      font-size: 14px;
+      letter-spacing: 0.005em;
+      color: var(--ink-2);
+      white-space: nowrap;
+    }
+    .pill-hint-rule {
+      display: block;
+      flex-shrink: 0;
+    }
+    @keyframes hint-fade {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 1; }
+    }
+
+    /* ───────────────────────── BADGE SECTION ───────────────────────── */
+    section.section {
+      padding: 96px 0;
+      position: relative;
+    }
+    .section-eyebrow {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .section-eyebrow-num {
+      font-family: 'Geist Mono', monospace;
+      color: var(--accent);
+    }
+    .section-h2 {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.06;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+    .section-h2 em { font-style: italic; color: var(--accent); }
+    .section-p {
+      font-size: 17px;
+      color: var(--ink-2);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+    .section-header { margin-bottom: 56px; }
+
+    /* ─────────────────────── §06 · SIGNAL LAYER ─────────────────────── */
+    .section-dark {
+      padding: 0;
+    }
+    .signals-stage {
+      background: #0c1220;
+      border-radius: 24px;
+      padding: 80px 56px 64px;
+      color: rgba(255,255,255,0.92);
+      position: relative;
+      overflow: hidden;
+    }
+    .signals-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(45,212,191,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(45,212,191,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .signals-header {
+      text-align: center;
+      margin-bottom: 56px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+    .section-eyebrow-dark {
+      color: rgba(255,255,255,0.6);
+      justify-content: center;
+    }
+    .section-eyebrow-dark .section-eyebrow-num {
+      color: #2dd4bf;
+    }
+    .section-h2-dark {
+      color: white;
+    }
+    .section-h2-dark em {
+      color: #2dd4bf;
+    }
+    .section-p-dark {
+      color: rgba(255,255,255,0.7);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* The diagram: source on top, dashed fan, 5 readers below */
+    .signals-diagram {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .signals-source {
+      text-align: center;
+    }
+    .signals-source-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+    .signals-source-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: rgba(45,212,191,0.10);
+      border: 1px solid rgba(45,212,191,0.4);
+      border-radius: 999px;
+      color: #2dd4bf;
+      font-family: 'Geist', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .signals-fan {
+      width: 100%;
+      max-width: 720px;
+      height: 60px;
+      margin: 8px 0 0;
+    }
+
+    .signals-readers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      width: 100%;
+      margin-top: -4px;
+    }
+    .signals-reader {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .signals-reader-ico {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(45,212,191,0.10);
+      color: #2dd4bf;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .signals-reader-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.01em;
+    }
+    .signals-reader-sub {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.4;
+    }
+
+    .signals-tagline {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin: 56px auto 0;
+      font-family: 'Newsreader', serif;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      color: white;
+    }
+    .signals-tagline em {
+      font-style: italic;
+      color: #2dd4bf;
+    }
+
+    /* ─────────────────────── §00 · THE PROBLEM ─────────────────────── */
+    .gap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    .gap-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px 26px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    /* Small monospace label above each block — mirrors the .section-eyebrow style.
+       Listing = muted gray, Reality = teal accent + top border for visual pivot. */
+    .gap-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink-3, #6b7d8a);
+    }
+    .gap-label-real {
+      color: var(--accent);
+      margin-top: 14px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    /* The claim — serif, ink color, italic. Looks like a real listing pull-quote. */
+    .gap-claim {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    /* The reality — body copy, slightly muted, lets the claim do the heavy lifting */
+    .gap-real {
+      font-size: 14.5px;
+      color: var(--ink-2);
+      line-height: 1.55;
+    }
+    /* Closing line — serif editorial pull-quote tying back to the product */
+    .problem-footnote {
+      margin: 56px auto 0;
+      max-width: 760px;
+      text-align: center;
+      font-family: 'Newsreader', serif;
+      font-size: 22px;
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .problem-footnote em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .problem-footnote strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Full badge — kept dark, presented as artifact */
+    .badge-stage {
+      position: relative;
+      padding: 64px 48px;
+      background: var(--bg-2);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .badge-stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(12,18,32,0.08), transparent 70%),
+        radial-gradient(circle at 20% 20%, rgba(56,189,248,0.06), transparent 50%);
+      pointer-events: none;
+    }
+    .badge {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      background: var(--badge-surf);
+      border: 1px solid var(--badge-line-2);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: var(--shadow-badge);
+      color: var(--badge-text);
+    }
+    .badge-hdr {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .badge-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--badge-sub);
+      margin-bottom: 8px;
+    }
+    .badge-title {
+      font-family: 'Newsreader', serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      color: var(--badge-text);
+    }
+    .badge-meta {
+      font-size: 13px;
+      color: var(--badge-mute);
+      margin-top: 6px;
+    }
+    .badge-close {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.55);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .badge-close:hover {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+    }
+    .badge-close svg { width: 16px; height: 16px; }
+
+    .includes-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+    }
+    .includes-lbl {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--badge-text);
+      padding-left: 14px;
+      border-left: 3px solid var(--success);
+      line-height: 1.1;
+    }
+    .includes-count {
+      font-size: 13px;
+      color: var(--badge-mute);
+    }
+
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .amenity-card {
+      background: rgba(30,41,59,0.4);
+      border: 1px solid var(--badge-line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .amenity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .amenity-ico {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .amenity-ico svg { width: 18px; height: 18px; }
+    .ab {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .ab.teo {
+      background: var(--success);
+      color: #063855;
+      border: 1px solid var(--success);
+    }
+    .ab.host {
+      background: rgba(14,165,233,0.1);
+      color: var(--teo-host);
+      border: 1px solid rgba(14,165,233,0.3);
+    }
+    .ab svg { width: 9px; height: 9px; }
+    .amenity-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--badge-text);
+    }
+
+    .legend {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      padding: 16px 0;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .legend-txt {
+      font-size: 12.5px;
+      color: var(--badge-mute);
+    }
+
+    .div-line {
+      height: 1px;
+      background: var(--badge-line);
+      margin: 4px 0 20px;
+    }
+
+    .conn-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: rgba(30,41,59,0.35);
+      border: 1px solid var(--badge-line);
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .conn-icon {
+      color: var(--success);
+      display: flex;
+      align-items: center;
+    }
+    .conn-main {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex: 1;
+    }
+    .conn-speed {
+      font-family: 'Geist Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--badge-text);
+    }
+    .conn-unit {
+      font-size: 13px;
+      color: var(--badge-mute);
+    }
+    .conn-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 11px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .conn-chip.power { background: var(--tier-power); color: #0f172a; }
+    .conn-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .conn-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px var(--success);
+    }
+    .conn-date {
+      font-size: 12px;
+      color: var(--badge-mute);
+    }
+
+    /* Details toggle */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 0 2px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+    .toggle-icon {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+    .toggle-icon svg { width: 8px; height: 8px; color: var(--badge-sub); }
+    .toggle-icon.open { transform: rotate(180deg); }
+    .toggle-lbl { font-size: 10px; color: var(--badge-sub); }
+
+    /* Details panel */
+    .details-panel {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, margin-top 0.25s ease;
+      opacity: 0;
+      margin-top: 0;
+    }
+    .details-panel.open {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .detail-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 10px 13px;
+    }
+    .detail-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--badge-sub);
+      margin-bottom: 4px;
+    }
+    .detail-val {
+      font-family: 'Geist Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--badge-text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .detail-unit { font-size: 10px; color: var(--badge-mute); }
+    .detail-note {
+      font-size: 9.5px;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+    .detail-note.dl  { color: #2dd4bf; }
+    .detail-note.lat { color: #fbbf24; }
+    .detail-note.jit { color: #a78bfa; }
+    .detail-provider {
+      font-size: 11px;
+      color: var(--badge-sub);
+      margin-top: 8px;
+    }
+    .detail-provider span {
+      color: var(--badge-mute);
+      font-weight: 500;
+    }
+
+    .badge-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 18px;
+      border-top: 1px solid var(--badge-line);
+      margin-top: 12px;
+    }
+    .footer-brand {
+      font-family: 'Geist', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+    }
+    .footer-brand .fb-prefix { color: var(--success); }
+    .footer-brand .fb-suffix { color: white; }
+    .footer-brand .fb-tm {
+      font-size: 9px;
+      color: rgba(255,255,255,0.5);
+      margin-left: 1px;
+      align-self: flex-start;
+      line-height: 1;
+    }
+    .footer-patent {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--badge-sub);
+    }
+    .footer-url {
+      font-size: 12px;
+      color: var(--badge-mute);
+    }
+
+    /* ─────────────────────── PROPERTY VARIANTS ─────────────────────── */
+    /* Attribution legend — explains TEO/HOST chips before the cards */
+    .cat-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      padding: 14px 24px;
+      margin-bottom: 32px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      flex-wrap: wrap;
+    }
+    .cat-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cat-legend-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .cat-legend-chip svg { width: 9px; height: 9px; }
+    .cat-legend-chip.teo {
+      background: var(--success);
+      color: #063855;
+      border: 1px solid var(--success);
+    }
+    .cat-legend-chip.host {
+      background: rgba(14,165,233,0.1);
+      color: #0ea5e9;
+      border: 1px solid rgba(14,165,233,0.3);
+    }
+    .cat-legend-text {
+      font-size: 13px;
+      color: var(--ink-2);
+      letter-spacing: 0.005em;
+    }
+
+    /* ─────────────── CATEGORIES (section 02 / What's verified) ─────────────── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    /* min-width: 0 lets grid items shrink to fit their 1fr column instead of being
+       forced to min-content size by the aspect-ratio on their inner tiles */
+    .categories-grid > .cat-card { min-width: 0; }
+    .cat-conn-detail-grid,
+    .cat-amenity-grid { min-width: 0; }
+    .cat-conn-detail,
+    .cat-amenity-card { min-width: 0; }
+    .cat-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-self: stretch;
+      height: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .cat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -16px rgba(6,56,85,0.18);
+      border-color: var(--line-2);
+    }
+    .cat-head {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .cat-num {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .cat-name {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 24px;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .cat-desc {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    /* Dark inner stage — slice of the real badge, rendered identically */
+    .cat-stage {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-line);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: auto;
+      flex: 1;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      min-height: 240px;
+    }
+
+    /* Connection card — four sub-cards in a 2x2 grid matching the amenity grid shape */
+    .cat-conn-stack {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      gap: 14px;
+    }
+    .cat-conn-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+    .cat-conn-detail {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--badge-line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+      aspect-ratio: 3 / 2;
+    }
+    .cat-conn-detail-lbl {
+      font-family: 'Geist Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--badge-sub);
+    }
+    .cat-conn-detail-figure {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+    .cat-conn-detail-val {
+      font-family: 'Geist Mono', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--badge-text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .cat-conn-detail-unit {
+      font-size: 11px;
+      color: var(--badge-mute);
+    }
+
+    /* Small caption text below the value — mirrors the badge's .detail-note pattern.
+       Default is muted gray; accent classes paint it teal / amber / purple. */
+    .cat-conn-detail-note {
+      font-size: 10px;
+      line-height: 1;
+      color: var(--badge-sub);
+      white-space: nowrap;
+      margin-top: auto;
+    }
+    .cat-conn-detail.accent-dl  .cat-conn-detail-note { color: #2dd4bf; }
+    .cat-conn-detail.accent-lat .cat-conn-detail-note { color: #fbbf24; }
+    .cat-conn-detail.accent-jit .cat-conn-detail-note { color: #a78bfa; }
+
+    /* Provider + tested-date line, mirroring the badge's .detail-provider style */
+    .cat-conn-provider {
+      font-size: 11px;
+      color: var(--badge-sub);
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--badge-line);
+    }
+    .cat-conn-provider span {
+      color: var(--badge-mute);
+      font-weight: 500;
+    }
+
+    /* Workspace + Essentials grid — slice of badge amenities */
+    .cat-amenity-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-self: stretch;
+    }
+    .cat-amenity-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--badge-line);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      aspect-ratio: 3 / 2;
+    }
+    .cat-amenity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .cat-amenity-ico {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cat-amenity-ico svg { width: 17px; height: 17px; }
+    .cat-amenity-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .cat-amenity-chip svg { width: 8px; height: 8px; }
+    .cat-amenity-chip.teo {
+      background: var(--success);
+      color: #063855;
+      border: 1px solid var(--success);
+    }
+    .cat-amenity-chip.host {
+      background: rgba(14,165,233,0.1);
+      color: #0ea5e9;
+      border: 1px solid rgba(14,165,233,0.3);
+    }
+    .cat-amenity-name {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.25;
+      margin-top: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+
+    /* Closing line — section 02 */
+    .cat-closing {
+      margin-top: 48px;
+      text-align: center;
+      font-family: 'Newsreader', serif;
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─────────────────────────── HOW IT WORKS ─────────────────────────── */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 64px;
+      position: relative;
+    }
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 24%;
+      right: 24%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--line-2) 20%, var(--line-2) 80%, transparent);
+      z-index: 0;
+    }
+    /* Section 03 hero photo */
+    .how-hero-photo {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto 56px;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 7;
+      position: relative;
+      background: var(--bg-2);
+    }
+    .how-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .how-step {
+      position: relative;
+      z-index: 1;
+    }
+    .how-num {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--line-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .how-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .how-title {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    .how-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.55;
+    }
+    .how-footnote {
+      margin-top: 64px;
+      padding: 20px 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-2);
+      font-style: italic;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .how-footnote strong {
+      font-style: normal;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ─────────────── INSTALL OPTIONS (section 04) ─────────────── */
+    .install-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .install-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      min-width: 0;
+    }
+    .install-head {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .install-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .install-title {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .install-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    /* Stylized listing mockups */
+    .install-mockup {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 320px;
+    }
+
+    /* Description-style mockup (left card) */
+    .mock-listing-head {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .mock-listing-title {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .mock-listing-loc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .mock-listing-text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mock-text-line {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(6,56,85,0.07);
+    }
+    .mock-text-line.short { width: 65%; }
+    .mock-text-line.medium { width: 88%; }
+
+    /* Mini pill for the mockup */
+    .mock-pill {
+      display: flex;
+      align-items: stretch;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--badge-line-2);
+      background: var(--badge-bg);
+      box-shadow: 0 2px 8px -2px rgba(12,18,32,0.3);
+      margin-top: 6px;
+    }
+    .mock-pill-brand {
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-right: 1px solid var(--badge-line);
+      flex-shrink: 0;
+    }
+    .mock-pill-name {
+      font-family: 'Geist', sans-serif;
+      font-size: 10px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .mock-pill-name .a { font-weight: 600; color: var(--success); }
+    .mock-pill-name .b { font-weight: 600; color: rgba(255,255,255,0.92); }
+    .mock-pill-sub {
+      font-size: 7.5px;
+      font-weight: 500;
+      color: var(--success);
+      line-height: 1;
+    }
+    .mock-pill-conn {
+      flex: 1;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .mock-pill-speed {
+      display: flex;
+      align-items: baseline;
+      gap: 3px;
+    }
+    .mock-pill-val {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--badge-text);
+    }
+    .mock-pill-unit {
+      font-size: 8px;
+      color: var(--badge-mute);
+    }
+    .mock-pill-tier {
+      background: var(--success);
+      color: #063855;
+      font-size: 7.5px;
+      font-weight: 700;
+      padding: 1.5px 6px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+    }
+    .mock-pill-chev {
+      padding: 0 10px;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+    }
+    .mock-pill-chev svg { width: 10px; height: 10px; }
+
+    /* Amenity icons inside the mock pill */
+    .mock-pill-amenities {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 10px;
+      border-left: 1px solid var(--badge-line);
+      flex-shrink: 0;
+    }
+    .mock-pill-ico {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mock-pill-ico svg { width: 10px; height: 10px; }
+    .mock-pill-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      height: 18px;
+      border-radius: 9999px;
+      background: rgba(52,211,153,0.1);
+      border: 1px solid rgba(52,211,153,0.2);
+      font-size: 7px;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    /* Listing page with verification zone (right card) */
+    .mock-cover {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(180deg, transparent 60%, rgba(6,56,85,0.18) 100%),
+        url("https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=1200&q=85") center/cover no-repeat,
+        rgba(6,56,85,0.08);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Verification zone embedded in the listing page */
+    .mock-verify-zone {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-line-2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .mock-verify-head {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--badge-line);
+    }
+    .mock-verify-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--badge-sub);
+      line-height: 1;
+    }
+    .mock-verify-title {
+      font-family: 'Newsreader', serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.15;
+    }
+    .mock-verify-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+    .mock-verify-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mock-verify-tile-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .mock-verify-ico {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mock-verify-ico svg { width: 11px; height: 11px; }
+    .mock-verify-name {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.2;
+    }
+    .mock-verify-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 4px;
+      border-radius: 9999px;
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .mock-verify-chip.teo {
+      background: var(--success);
+      color: #063855;
+    }
+    .mock-verify-chip.host {
+      background: rgba(14,165,233,0.15);
+      color: #0ea5e9;
+      border: 1px solid rgba(14,165,233,0.4);
+    }
+    .mock-verify-conn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 8px;
+      border-top: 1px solid var(--badge-line);
+    }
+    .mock-verify-conn-data {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .mock-verify-conn-val {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      color: var(--badge-text);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .mock-verify-conn-unit {
+      font-size: 8px;
+      color: var(--badge-mute);
+    }
+    .mock-verify-conn-tier {
+      background: var(--success);
+      color: #063855;
+      font-size: 7px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+    }
+    .mock-verify-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .mock-verify-brand {
+      font-family: 'Geist', sans-serif;
+      font-size: 8.5px;
+      letter-spacing: -0.01em;
+    }
+    .mock-verify-brand .a { font-weight: 600; color: var(--success); }
+    .mock-verify-brand .b { font-weight: 600; color: rgba(255,255,255,0.9); }
+    .mock-verify-brand .dot { color: var(--success); }
+    .mock-verify-tested {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mock-verify-tested-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 4px var(--success);
+    }
+    .mock-verify-tested-txt {
+      font-size: 7.5px;
+      color: var(--badge-sub);
+    }
+
+    /* Badge snippet (left card — faded preview below pill) */
+    .mock-snippet {
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-line-2);
+      border-radius: 10px;
+      padding: 12px 14px 0;
+      position: relative;
+      overflow: hidden;
+      max-height: 220px;
+      margin-top: 4px;
+    }
+    .mock-snippet::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 38px;
+      background: linear-gradient(to bottom, transparent 0%, var(--badge-bg) 95%);
+      pointer-events: none;
+    }
+    /* Identity row at top — eyebrow + property + close X */
+    .mock-snippet-id {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .mock-snippet-id-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+    .mock-snippet-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 7px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--badge-sub);
+      line-height: 1;
+    }
+    .mock-snippet-title {
+      font-family: 'Newsreader', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.05;
+    }
+    .mock-snippet-sub {
+      font-size: 8px;
+      color: var(--badge-sub);
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .mock-snippet-close {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mock-snippet-close svg {
+      width: 8px; height: 8px;
+      color: var(--badge-mute);
+    }
+    /* "This workspace includes" header line with accent + counter */
+    .mock-snippet-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+    }
+    .mock-snippet-section-title {
+      font-family: 'Newsreader', serif;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.1;
+      padding-left: 7px;
+      border-left: 2px solid var(--accent);
+    }
+    .mock-snippet-section-counter {
+      font-size: 8px;
+      color: var(--badge-sub);
+    }
+    .mock-snippet-tiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .mock-snippet-tile {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 8px 8px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mock-snippet-tile-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 5px;
+    }
+    .mock-snippet-ico {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mock-snippet-ico svg { width: 9px; height: 9px; }
+    .mock-snippet-name {
+      font-size: 8.5px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.15;
+    }
+    .mock-snippet-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 3px;
+      border-radius: 9999px;
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .mock-snippet-chip.teo {
+      background: var(--success);
+      color: #063855;
+    }
+    .mock-snippet-chip.host {
+      background: rgba(14,165,233,0.15);
+      color: #0ea5e9;
+      border: 1px solid rgba(14,165,233,0.4);
+    }
+
+    /* Always-visible badge variant (right card — no header, opens with "This workspace includes") */
+    .mock-verify-lead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .mock-verify-lead-text {
+      font-family: 'Newsreader', serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--badge-text);
+      line-height: 1.2;
+      padding-left: 8px;
+      border-left: 2px solid var(--accent);
+    }
+    .mock-verify-counter {
+      font-size: 9px;
+      color: var(--badge-sub);
+      letter-spacing: 0.01em;
+    }
+
+    /* Mini legend strip below tiles in right-card badge */
+    .mock-verify-legend {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--badge-line);
+    }
+    .mock-verify-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .mock-verify-legend-text {
+      font-size: 7.5px;
+      color: var(--badge-mute);
+      letter-spacing: 0.005em;
+    }
+
+    /* Connection footer with wifi icon */
+    .mock-verify-conn-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mock-verify-conn-wifi {
+      width: 16px; height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .mock-verify-conn-tested {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .mock-verify-conn-tested-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 4px var(--success);
+    }
+    .mock-verify-conn-tested-txt {
+      font-size: 8px;
+      color: var(--badge-sub);
+    }
+
+    /* Show technical details disclosure */
+    .mock-verify-disclosure {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-top: 6px;
+    }
+    .mock-verify-disclosure-ico {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mock-verify-disclosure-ico svg { width: 6px; height: 6px; color: var(--badge-mute); }
+    .mock-verify-disclosure-txt {
+      font-size: 8px;
+      color: var(--badge-mute);
+    }
+
+    /* Footer row - wordmark, patent pending, domain */
+    .mock-verify-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px solid var(--badge-line);
+      margin-top: 4px;
+    }
+    .mock-verify-patent {
+      font-family: 'Geist Mono', monospace;
+      font-size: 6px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--badge-sub);
+    }
+    .mock-verify-domain {
+      font-size: 7px;
+      color: var(--badge-mute);
+    }
+
+    /* ─────────────── SCALED REAL BADGE FOR INSTALL MOCKUPS ─────────────── */
+    .badge-scaler {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    /* Inner holds real badge HTML at natural ~540px width;
+       transform: scale shrinks visually while keeping real classes intact */
+    .badge-scaler-inner {
+      width: 480px;
+      transform-origin: top left;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-line-2);
+      border-radius: 22px;
+      padding: 22px 22px 14px;
+    }
+    .badge-scaler.right .badge-scaler-inner,
+    .badge-scaler.left .badge-scaler-inner {
+      transform: scale(0.56);
+    }
+    .badge-scaler.right { height: 305px; }
+    .badge-scaler.left { height: 200px; }
+
+    /* Fade overlay for the left snippet */
+    .badge-scaler.left::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent 0%, var(--badge-bg) 95%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    /* Inside scaled fragments, force a 2-column amenity grid (badge default is 3-col) */
+    .badge-scaler .amenity-grid {
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 16px;
+    }
+
+    /* ─────────────────────────────── PRICING ─────────────────────────────── */
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .pricing-card {
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 24px;
+      padding: 44px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle at top right, rgba(0,136,161,0.20), transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: rgba(0,136,161,0.15);
+      border: 1px solid rgba(0,136,161,0.4);
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #38bdf8;
+      margin-bottom: 28px;
+    }
+    .pricing-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 6px rgba(56,189,248,0.6);
+    }
+    /* Single hero price + secondary setup fee */
+    .pricing-hero {
+      margin-bottom: 8px;
+    }
+    .pricing-amount {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      line-height: 1;
+    }
+    .pricing-num {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 76px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--badge-text);
+    }
+    .pricing-per {
+      font-size: 18px;
+      color: var(--badge-mute);
+    }
+    .pricing-tagline {
+      font-size: 15px;
+      color: var(--badge-mute);
+      margin-top: 14px;
+      letter-spacing: 0.005em;
+    }
+    .pricing-alt {
+      font-size: 13px;
+      color: var(--badge-mute);
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .pricing-alt strong {
+      color: var(--badge-text);
+      font-weight: 600;
+    }
+    .pricing-setup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      margin-top: 22px;
+      margin-bottom: 28px;
+      font-size: 15px;
+      color: var(--badge-text);
+      flex-wrap: wrap;
+    }
+    .pricing-setup-bold {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 22px;
+      color: var(--badge-text);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .pricing-setup-sub {
+      color: var(--badge-mute);
+      font-size: 13px;
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 0;
+      font-size: 14.5px;
+      color: var(--badge-text);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .pricing-features li:first-child { border-top: none; padding-top: 0; }
+    .pricing-features svg {
+      width: 16px; height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .pricing-card .btn-primary {
+      background: var(--accent);
+      color: white;
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .pricing-card .btn-primary:hover { background: #009ab8; }
+
+    /* ──────── EARLY-ACCESS SIGNUP FORM (inside pricing card) ──────── */
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+    }
+    /* Same [hidden] override pattern as below — flex layout would otherwise win. */
+    .signup-form[hidden] { display: none; }
+    .signup-form-intro {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    /* Small line below the eyebrow — decouples the form from payment perception. */
+    .signup-form-disarm {
+      font-size: 13.5px;
+      color: var(--badge-mute);
+      line-height: 1.5;
+      margin: 0 0 6px;
+    }
+    .signup-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .signup-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--badge-mute);
+      letter-spacing: 0.01em;
+    }
+    .signup-label-optional span {
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+      margin-left: 4px;
+    }
+    .signup-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 10px;
+      font-family: 'Geist', sans-serif;
+      font-size: 14.5px;
+      color: var(--badge-text);
+      transition: border-color 120ms ease, background-color 120ms ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .signup-input::placeholder {
+      color: rgba(255,255,255,0.32);
+    }
+    .signup-input:hover {
+      border-color: rgba(255,255,255,0.18);
+    }
+    .signup-input:focus {
+      outline: none;
+      border-color: rgba(45,212,191,0.6);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 0 0 3px rgba(45,212,191,0.15);
+    }
+    .signup-textarea {
+      resize: vertical;
+      min-height: 76px;
+      line-height: 1.4;
+      font-family: 'Geist', sans-serif;
+    }
+    /* Invalid state — only flagged after a failed submit attempt, not on initial render. */
+    .signup-form.was-validated .signup-input:invalid {
+      border-color: rgba(248,113,113,0.55);
+    }
+    .signup-form.was-validated .signup-input:invalid:focus {
+      box-shadow: 0 0 0 3px rgba(248,113,113,0.15);
+    }
+
+    .signup-submit {
+      margin-top: 6px;
+      cursor: pointer;
+      border: none;
+      font-family: 'Geist', sans-serif;
+      position: relative;
+    }
+    .signup-submit-sending { display: none; }
+    .signup-submit[disabled] { opacity: 0.7; cursor: progress; }
+    .signup-submit[disabled] .signup-submit-default { display: none; }
+    .signup-submit[disabled] .signup-submit-sending { display: inline; }
+
+    .signup-error {
+      font-size: 13px;
+      color: #fca5a5;
+      min-height: 0;
+      line-height: 1.4;
+    }
+    .signup-error:empty { display: none; }
+
+    .signup-privacy {
+      font-size: 11.5px;
+      color: var(--badge-mute);
+      line-height: 1.5;
+      margin: 6px 0 0;
+      text-align: center;
+    }
+
+    /* Thank-you state — replaces the form on successful submit. */
+    .signup-thanks {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding: 28px 12px 16px;
+    }
+    /* Ensure the [hidden] attribute always wins over the flex layout above. */
+    .signup-thanks[hidden] { display: none; }
+    .signup-thanks-mark {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(45,212,191,0.10);
+      color: #2dd4bf;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .signup-thanks-title {
+      font-family: 'Newsreader', serif;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      color: white;
+    }
+    .signup-thanks-text {
+      font-size: 14.5px;
+      color: var(--badge-mute);
+      line-height: 1.55;
+      max-width: 320px;
+      margin: 0;
+    }
+    .pricing-reassurance {
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--badge-mute);
+      margin-top: 14px;
+      letter-spacing: 0.005em;
+    }
+
+    /* Value-justification stack: 3 small "why this is worth it" blocks above the
+       early-access copy. Each block has a monospace eyebrow + body text, separated
+       by hairline dividers. Designed to feel like considered reasoning, not bullets. */
+    .value-blocks {
+      margin-bottom: 40px;
+    }
+    .value-block {
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+    }
+    .value-block:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+    .value-block-eyebrow {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .value-block-text {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .pricing-side h3 {
+      font-family: 'Newsreader', serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .pricing-side h3 em { font-style: italic; color: var(--accent); }
+    .pricing-side p {
+      font-size: 16px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .pricing-side .small {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 16px 18px;
+      background: var(--bg-2);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    .pricing-side .small em {
+      font-style: italic;
+      color: var(--ink-2);
+    }
+
+    /* ─────────────────────────────── FOOTER ─────────────────────────────── */
+    footer.site-footer {
+      padding: 64px 0 40px;
+      border-top: 1px solid var(--line);
+      margin-top: 48px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-block {
+      max-width: 380px;
+    }
+    .footer-brand-block .brand-wordmark {
+      font-size: 36px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 18px;
+    }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: var(--ink-2);
+      text-decoration: none;
+      padding: 5px 0;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-bottom-r {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+    .footer-bottom-r .pp {
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+    }
+
+    /* ─────────────────────────────── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 920px) {
+      .container { padding: 0 24px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+      /* min-width:0 prevents grid items from being forced wider than their column by min-content */
+      .hero-text-col, .listing-frame { min-width: 0; }
+      .hero { padding: 48px 0 24px; }
+      /* Smaller h1 floor so long words like "delivers." don't force horizontal overflow */
+      .hero h1 { font-size: clamp(34px, 8vw, 56px); }
+      .hero-sub { max-width: none; }
+      .categories-grid { grid-template-columns: 1fr; gap: 14px; }
+      .gap-grid { grid-template-columns: 1fr; gap: 12px; }
+      .gap-card { padding: 22px 22px 24px; }
+      .gap-claim { font-size: 22px; }
+      .problem-footnote { font-size: 18px; margin-top: 40px; }
+      /* §06 mobile: tighter stage, readers in 2 columns, hide the fan since it doesn't translate to stacked layout */
+      .signals-stage { padding: 56px 24px 48px; border-radius: 18px; }
+      .signals-fan { display: none; }
+      .signals-readers { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 28px; }
+      .signals-reader { padding: 16px 12px; }
+      .signals-tagline { font-size: 22px; margin-top: 40px; }
+      /* Tighten amenity-card padding on mobile so longest name ('Mouse / Keyboard') still fits */
+      .cat-amenity-card { padding: 8px 10px; }
+      .cat-amenity-name { font-size: 12px; }
+      .install-grid { grid-template-columns: 1fr; gap: 14px; }
+      .how-grid { grid-template-columns: 1fr; gap: 36px; }
+      .how-grid::before { display: none; }
+      .how-hero-photo { aspect-ratio: 4 / 3; margin-bottom: 36px; }
+      .pricing-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .badge-stage { padding: 36px 20px; }
+      .amenity-grid { grid-template-columns: repeat(2, 1fr); }
+      section.section { padding: 64px 0; }
+      /* Hide menu anchors on mobile but keep the CTA button reachable */
+      .nav-links { gap: 0; }
+      .nav-links a:not(.btn) { display: none; }
+      .badge { padding: 24px 20px; }
+      /* Prevent listing card / pill from overflowing the viewport on narrow screens */
+      .listing-frame { margin-right: 0; }
+      .pill { margin-right: 0; max-width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .container { padding: 0 18px; }
+      .pill { font-size: 11px; }
+      .p-brand { padding: 8px 10px; }
+      .p-conn, .p-amenities { padding: 0 10px; }
+      .p-speed-val { font-size: 14px; }
+      .p-name { font-size: 11px; }
+      .pricing-card { padding: 32px 24px; }
+      .pricing-num { font-size: 60px; }
+      /* On narrow screens, hide the amenities column + its preceding separator
+         so the pill fits and the chevron stays tappable. The full amenity grid
+         lives in the expanded badge section below. */
+      .p-amenities,
+      .p-sep:has(+ .p-amenities) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip-to-content link: keyboard users tab to this first; hidden until focused.
+       Lets them jump past the nav directly to the main content. -->
+  <a href="#main" class="skip-to-content">Skip to main content</a>
+
+  <div class="container">
+
+    <!-- ── NAV ── -->
+    <nav class="site-nav">
+      <div class="nav-row">
+        <a href="#" class="brand">
+          <span class="brand-wordmark"><span class="bw-prefix">Teo</span><span class="bw-suffix">Verified</span><span class="bw-dot">.</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="#badge">The badge</a>
+          <a href="#stays">What's verified</a>
+          <a href="#how">How it works</a>
+          <a href="#install">Install</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#pricing" class="btn btn-ghost">Request access</a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            For direct-booking hosts
+            <span class="hero-eyebrow-sep">·</span>
+            <span class="hero-eyebrow-pat">Patent Pending</span>
+          </div>
+          <h1>Show what your stay <em>actually</em> delivers.</h1>
+          <p class="hero-sub">Does your stay actually give guests a place to work? With the amenities they rely on — internet, workspace, comfort? Show them. Independently verified. Embedded on your listing. Proudly displayed.</p>
+          <div class="hero-cta-row">
+            <a href="#pricing" class="btn btn-primary">
+              Request early access
+              <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#badge" class="hero-link-arrow">
+              See the badge
+              <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Listing mockup -->
+        <div class="listing-frame">
+          <div class="listing-card">
+            <div class="listing-photo">
+              <img class="listing-photo-img" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?auto=format&fit=crop&w=2400&q=90" alt="Verified workspace with dual-monitor setup and window view" loading="eager" />
+            </div>
+            <div class="listing-body">
+              <div class="listing-meta">
+                <div class="listing-name">Oceanview Studio</div>
+                <div class="listing-price">$245 <em>/ night</em></div>
+              </div>
+              <div class="listing-loc">Half Moon Bay, California</div>
+              <div class="listing-stars">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#0c1220"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <span class="listing-stars-num">4.97</span>
+                <span class="listing-stars-count">· 124 reviews</span>
+              </div>
+              <!-- Pill embedded -->
+              <div class="pill" id="pill" onclick="document.getElementById('badge-section').scrollIntoView({behavior:'smooth', block:'start'});">
+                <div class="p-brand">
+                  <div class="p-brand-text">
+                    <span class="p-name"><span style="font-weight:600;color:#34d399;">Teo</span><span style="font-weight:600;color:rgba(255,255,255,0.92);">Verified</span></span>
+                    <span class="p-sub">Workspace Ready</span>
+                  </div>
+                </div>
+                <div class="p-sep"></div>
+                <div class="p-conn">
+                  <div class="p-conn-inner">
+                    <span class="p-col-label">Connection</span>
+                    <div class="p-speed-row">
+                      <span class="p-speed-val">385</span>
+                      <span class="p-speed-unit">Mbps</span>
+                      <span class="tier-chip power">Power</span>
+                    </div>
+                    <div class="p-tested-row">
+                      <span class="p-tested-dot"></span>
+                      <span class="p-tested-txt">Tested today</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-sep"></div>
+                <div class="p-amenities">
+                  <div class="p-amenities-inner">
+                    <span class="p-col-label">Work amenities</span>
+                    <div class="p-icons-row">
+                      <div class="p-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8" stroke-width="1.4"/></svg></div>
+                      <div class="p-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="16" x2="12" y2="21"/></svg></div>
+                      <div class="p-ico" style="background:rgba(0,136,161,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#0088A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="3.5" rx="1.5" stroke-width="1.3"/><rect x="8" y="5.5" width="8" height="7.5" rx="1.5"/><rect x="7" y="13" width="10" height="3.5" rx="1.2" stroke-width="1.2"/></svg></div>
+                      <span class="p-more">+3</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-chevron">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pill-hint" id="pillHint">
+            <span class="pill-hint-text">See what's verified</span>
+            <svg aria-hidden="true" class="pill-hint-rule" width="56" height="32" viewBox="0 0 56 32" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-2); opacity: 0.65;">
+              <!-- Horizontal line vertically centered, then 90° up at the right -->
+              <path d="M 0 16 L 48 16 L 48 4"/>
+              <polyline points="45.5 6.5 48 4 50.5 6.5"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 00 · THE PROBLEM ── -->
+    <section class="section" id="problem">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">00</span>
+          The problem
+        </div>
+        <h2 class="section-h2">The listing economy runs on trust it can't always <em>prove</em>.</h2>
+        <p class="section-p">Photos get angled. "Fast wifi" means 10 Mbps in one listing and a gigabit in the next. "Great for remote work" means whatever the host needs it to mean. The amenities guests rely on most — the ones they're actually booking on — are the ones least likely to be verified.</p>
+      </div>
+
+      <div class="gap-grid">
+        <div class="gap-card">
+          <div class="gap-label">Listing</div>
+          <div class="gap-claim">"Fast wifi."</div>
+          <div class="gap-label gap-label-real">Unverified claim</div>
+          <div class="gap-real">10 Mbps. 200 Mbps. Gigabit fiber. Same two words, wildly different stays.</div>
+        </div>
+        <div class="gap-card">
+          <div class="gap-label">Listing</div>
+          <div class="gap-claim">"Great for remote work."</div>
+          <div class="gap-label gap-label-real">Unverified claim</div>
+          <div class="gap-real">A folding table by the window. A real desk and an external monitor. No way for guests to tell which one they're booking.</div>
+        </div>
+        <div class="gap-card">
+          <div class="gap-label">Listing</div>
+          <div class="gap-claim">"Quiet, comfortable space."</div>
+          <div class="gap-label gap-label-real">Unverified claim</div>
+          <div class="gap-real">The chair, the lighting, the climate control, the surge protection — every listing claims them, almost none verify them.</div>
+        </div>
+      </div>
+
+      <p class="problem-footnote">Guests who need a stay to actually work end up guessing. Hosts who <em>do</em> invest in real amenities have no way to show it. Both sides lose to the listing willing to oversell. <strong>TeoVerified closes that gap.</strong></p>
+    </section>
+
+    <!-- ── BADGE SECTION ── -->
+    <section class="section" id="badge-section">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">01</span>
+          The verification
+        </div>
+        <h2 class="section-h2">This is what shows on <em>your</em> listing.</h2>
+        <p class="section-p">The amenities you offer, now verified. The green badges are independently confirmed by TeoVerified. The blue badges are reported by you. Both are clearly labeled — so guests know exactly what they're getting, and you get credit for everything your stay actually delivers.</p>
+      </div>
+
+      <div class="badge-stage">
+        <div class="badge" id="badge">
+
+          <!-- Header -->
+          <div class="badge-hdr">
+            <div>
+              <div class="badge-eyebrow">Verification Overview</div>
+              <div class="badge-title">Oceanview Studio</div>
+              <div class="badge-meta">TeoVerified · Valid until <span class="js-today-date">today</span></div>
+            </div>
+            <button type="button" class="badge-close" aria-label="Close">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <line x1="6" y1="6" x2="18" y2="18"/>
+                <line x1="18" y1="6" x2="6" y2="18"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Includes -->
+          <div class="includes-row">
+            <span class="includes-lbl">This workspace includes</span>
+            <span class="includes-count">4 of 6 verified</span>
+          </div>
+
+          <div class="amenity-grid">
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8" stroke-width="1.4"/></svg></div>
+                <span class="ab teo">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  TEO
+                </span>
+              </div>
+              <div class="amenity-name">Dedicated Office/Room</div>
+            </div>
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="16" x2="12" y2="21"/></svg></div>
+                <span class="ab teo">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  TEO
+                </span>
+              </div>
+              <div class="amenity-name">External Monitor</div>
+            </div>
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(0,136,161,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#0088A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="3.5" rx="1.5" stroke-width="1.3"/><rect x="8" y="5.5" width="8" height="7.5" rx="1.5"/><rect x="7" y="13" width="10" height="3.5" rx="1.2" stroke-width="1.2"/></svg></div>
+                <span class="ab host">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  HOST
+                </span>
+              </div>
+              <div class="amenity-name">Ergonomic Chair</div>
+            </div>
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(148,163,184,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" stroke="#94a3b8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><rect x="2" y="11" width="11" height="7" rx="1.5"/><circle cx="5" cy="14.5" r="0.6" fill="#94a3b8"/><circle cx="8" cy="14.5" r="0.6" fill="#94a3b8"/><rect x="15" y="9" width="6" height="9" rx="3"/></svg></div>
+                <span class="ab teo">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  TEO
+                </span>
+              </div>
+              <div class="amenity-name">Mouse / Keyboard</div>
+            </div>
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(249,115,22,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 2 L10.5 5.5 L13 5.5 L11 9"/><rect x="3" y="13" width="18" height="6" rx="1.5"/><line x1="7" y1="15.5" x2="7" y2="17"/><line x1="11" y1="15.5" x2="11" y2="17"/><line x1="15" y1="15.5" x2="15" y2="17"/><line x1="19" y1="15.5" x2="19" y2="17"/></svg></div>
+                <span class="ab host">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  HOST
+                </span>
+              </div>
+              <div class="amenity-name">Power Strip</div>
+            </div>
+            <div class="amenity-card">
+              <div class="amenity-top">
+                <div class="amenity-ico" style="background:rgba(251,191,36,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C8.5 3 6 5.8 6 9C6 12 8 14 10 15.2L10 17L14 17L14 15.2C16 14 18 12 18 9C18 5.8 15.5 3 12 3Z"/><line x1="10" y1="17" x2="14" y2="17"/><line x1="11" y1="19" x2="13" y2="19"/></svg></div>
+                <span class="ab host">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                  HOST
+                </span>
+              </div>
+              <div class="amenity-name">Ambient Lighting</div>
+            </div>
+          </div>
+
+          <div class="legend">
+            <div class="legend-row">
+              <span class="ab teo">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                TEO
+              </span>
+              <span class="legend-txt">Independently verified by TeoVerified</span>
+            </div>
+            <div class="legend-row">
+              <span class="ab host">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+                HOST
+              </span>
+              <span class="legend-txt">Reported by the property host</span>
+            </div>
+          </div>
+
+          <div class="div-line"></div>
+
+          <div class="conn-row">
+            <span class="conn-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20">
+                <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <line x1="12" y1="20" x2="12.01" y2="20"/>
+              </svg>
+            </span>
+            <div class="conn-main">
+              <span class="conn-speed">385</span>
+              <span class="conn-unit">Mbps</span>
+              <span class="conn-chip power">Power</span>
+            </div>
+            <div class="conn-right">
+              <div class="conn-dot"></div>
+              <span class="conn-date">Tested today</span>
+            </div>
+          </div>
+
+          <button type="button" class="toggle-btn" onclick="toggleDetails(this)" aria-expanded="false" aria-controls="detailsPanel">
+            <div class="toggle-icon" id="toggleIcon">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </div>
+            <span class="toggle-lbl">Show technical details</span>
+          </button>
+
+          <div class="details-panel" id="detailsPanel">
+            <div class="detail-grid">
+              <div class="detail-card">
+                <div class="detail-lbl">Download</div>
+                <div><span class="detail-val">385</span><span class="detail-unit"> Mbps</span></div>
+                <div class="detail-note dl">&uarr; 42 Mbps upload</div>
+              </div>
+              <div class="detail-card">
+                <div class="detail-lbl">Latency</div>
+                <div><span class="detail-val">18</span><span class="detail-unit"> ms</span></div>
+                <div class="detail-note lat">Median ping</div>
+              </div>
+              <div class="detail-card">
+                <div class="detail-lbl">Jitter</div>
+                <div><span class="detail-val">3.2</span><span class="detail-unit"> ms</span></div>
+                <div class="detail-note jit">Stable connection</div>
+              </div>
+            </div>
+            <div class="detail-provider">Provider: <span>Fiber Provider</span> &bull; Tested Mar 28, 2026</div>
+          </div>
+
+          <div class="badge-footer">
+            <span class="footer-brand"><span class="fb-prefix">Teo</span><span class="fb-suffix">Verified</span><span class="fb-tm">™</span></span>
+            <span class="footer-patent">Patent Pending</span>
+            <span class="footer-url">teoverified.com</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STAYS / VARIANTS ── -->
+    <section class="section" id="stays">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">02</span>
+          What's verified
+        </div>
+        <h2 class="section-h2">What gets <em>verified.</em></h2>
+        <p class="section-p">Three categories. One credential. Each one covers what guests actually need to know before they commit to working — or relaxing — from your stay.</p>
+      </div>
+
+      <div class="cat-legend">
+        <div class="cat-legend-item">
+          <span class="cat-legend-chip teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+          <span class="cat-legend-text">Independently verified by TeoVerified</span>
+        </div>
+        <div class="cat-legend-item">
+          <span class="cat-legend-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+          <span class="cat-legend-text">Reported by the property host</span>
+        </div>
+      </div>
+
+      <div class="categories-grid">
+
+        <!-- 01 — Connection -->
+        <div class="cat-card">
+          <div class="cat-head">
+            <span class="cat-num">01</span>
+            <span class="cat-name">Connection</span>
+          </div>
+          <p class="cat-desc">Internet performance, with real numbers — not estimates, or provider generics. From basic speed to latency and jitter — all the numbers your guests need to ensure their workflow is accommodated.</p>
+          <div class="cat-stage">
+            <div class="cat-conn-stack">
+              <div class="cat-conn-detail-grid">
+                <div class="cat-conn-detail">
+                  <div class="cat-conn-detail-lbl">Download</div>
+                  <div class="cat-conn-detail-figure"><span class="cat-conn-detail-val">385</span><span class="cat-conn-detail-unit">Mbps</span></div>
+                  <div class="cat-conn-detail-note">Power tier</div>
+                </div>
+                <div class="cat-conn-detail accent-dl">
+                  <div class="cat-conn-detail-lbl">Upload</div>
+                  <div class="cat-conn-detail-figure"><span class="cat-conn-detail-val">42</span><span class="cat-conn-detail-unit">Mbps</span></div>
+                  <div class="cat-conn-detail-note">Symmetric fiber</div>
+                </div>
+                <div class="cat-conn-detail accent-lat">
+                  <div class="cat-conn-detail-lbl">Latency</div>
+                  <div class="cat-conn-detail-figure"><span class="cat-conn-detail-val">18</span><span class="cat-conn-detail-unit">ms</span></div>
+                  <div class="cat-conn-detail-note">Median ping</div>
+                </div>
+                <div class="cat-conn-detail accent-jit">
+                  <div class="cat-conn-detail-lbl">Jitter</div>
+                  <div class="cat-conn-detail-figure"><span class="cat-conn-detail-val">3.2</span><span class="cat-conn-detail-unit">ms</span></div>
+                  <div class="cat-conn-detail-note">Stable connection</div>
+                </div>
+              </div>
+              <div class="cat-conn-provider">Provider: <span>Fiber Provider</span> &bull; Tested <span class="js-today-date">today</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 — Workspace -->
+        <div class="cat-card">
+          <div class="cat-head">
+            <span class="cat-num">02</span>
+            <span class="cat-name">Workspace</span>
+          </div>
+          <p class="cat-desc">The desk, the chair, the monitor, the room — what the photos can imply but can't confirm. The amenities your guests require, now part of your listing's personality.</p>
+          <div class="cat-stage">
+            <div class="cat-amenity-grid">
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8"/></svg></div>
+                  <span class="cat-amenity-chip teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                </div>
+                <div class="cat-amenity-name">Dedicated Office</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="16" x2="12" y2="21"/></svg></div>
+                  <span class="cat-amenity-chip teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                </div>
+                <div class="cat-amenity-name">External Monitor</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(0,136,161,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#0088A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="3.5" rx="1.5"/><rect x="8" y="5.5" width="8" height="7.5" rx="1.5"/><rect x="7" y="13" width="10" height="3.5" rx="1.2"/></svg></div>
+                  <span class="cat-amenity-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                </div>
+                <div class="cat-amenity-name">Ergonomic Chair</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(148,163,184,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="11" width="11" height="7" rx="1.5"/><circle cx="18" cy="14.5" r="3"/></svg></div>
+                  <span class="cat-amenity-chip teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                </div>
+                <div class="cat-amenity-name">Mouse / Keyboard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 — Essentials -->
+        <div class="cat-card">
+          <div class="cat-head">
+            <span class="cat-num">03</span>
+            <span class="cat-name">Essentials</span>
+          </div>
+          <p class="cat-desc">Power strips, surge protection, climate control, ambient lighting — the things that can make work easier. The small details that turn a stay into a workplace.</p>
+          <div class="cat-stage">
+            <div class="cat-amenity-grid">
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(249,115,22,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="6" rx="1.5"/><circle cx="8" cy="16" r="0.8" fill="#f97316"/><circle cx="13" cy="16" r="0.8" fill="#f97316"/><path d="M10 7l-2 5h4l-2 5"/></svg></div>
+                  <span class="cat-amenity-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                </div>
+                <div class="cat-amenity-name">Power Strip</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(251,191,36,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C8.5 3 6 5.8 6 9C6 12 8 14 10 15.2L10 17L14 17L14 15.2C16 14 18 12 18 9C18 5.8 15.5 3 12 3Z"/><line x1="10" y1="20" x2="14" y2="20"/></svg></div>
+                  <span class="cat-amenity-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                </div>
+                <div class="cat-amenity-name">Ambient Lighting</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(96,165,250,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg></div>
+                  <span class="cat-amenity-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                </div>
+                <div class="cat-amenity-name">Climate Control</div>
+              </div>
+              <div class="cat-amenity-card">
+                <div class="cat-amenity-top">
+                  <div class="cat-amenity-ico" style="background:rgba(34,197,94,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+                  <span class="cat-amenity-chip host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                </div>
+                <div class="cat-amenity-name">Surge Protection</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="cat-closing">Work amenities, now given the weight they always carried.</p>
+    </section>
+
+    <!-- ── HOW IT WORKS ── -->
+    <section class="section" id="how">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">03</span>
+          How it works
+        </div>
+        <h2 class="section-h2">Two steps. <em>And done.</em></h2>
+        <p class="section-p">After you sign up, the path is the same whether you're hands-on or hands-off. The product adapts to you, not the other way around.</p>
+      </div>
+
+      <!--
+        Hero photo placeholder for the "How it works" section.
+        Drop your final image in /public (or alongside index.html on Vercel)
+        and uncomment the block below. Recommended: a 16:7 photo of a verified
+        stay / clean workspace, ~2400px wide, optimized to webp or jpg.
+
+      <div class="how-hero-photo">
+        <img src="/how-hero.jpg" alt="A verified workspace inside a TeoVerified-listed stay">
+      </div>
+      -->
+
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">i</div>
+          <div class="how-label">Step one</div>
+          <div class="how-title">Verify your amenities.</div>
+          <p class="how-desc">For connection performance, we send a test link — open it on your home wifi and the test runs on its own. For workspace and essentials, upload a few photos or just confirm what's already in your listing. We'll clearly label what's been independently verified and what you've reported yourself.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">ii</div>
+          <div class="how-label">Step two</div>
+          <div class="how-title">Place the pill &mdash; your credential &mdash; on your listing.</div>
+          <p class="how-desc">We send you an embed snippet (or a badge-image link, if your listing platform doesn't allow code). Place it once. It updates automatically when you re-verify.</p>
+        </div>
+      </div>
+
+      <p class="how-footnote">Retest, update amenities, or get a new pill anytime — it all happens in your <strong>dashboard</strong>.</p>
+    </section>
+
+    <!-- ── INSTALL OPTIONS ── -->
+    <section class="section" id="install">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">04</span>
+          Install
+        </div>
+        <h2 class="section-h2">One credential, <em>two ways to show it.</em></h2>
+        <p class="section-p">Whichever fits your listing best — a small line of code on your site, or an image you upload to your photo gallery. Both deliver the same verified credential.</p>
+      </div>
+
+      <div class="install-grid">
+
+        <!-- Left: Code embed -->
+        <div class="install-card">
+          <div class="install-head">
+            <div class="install-eyebrow">Code embed</div>
+            <div class="install-title">Live in your listing description.</div>
+            <p class="install-desc">One line of code, placed where you'd add a photo or paragraph. The pill stays current automatically and expands on tap.</p>
+          </div>
+          <div class="install-mockup">
+            <div class="mock-listing-head">
+              <div class="mock-listing-title">Sunset View Studio</div>
+              <div class="mock-listing-loc">Half Moon Bay, CA</div>
+            </div>
+            <div class="mock-cover"></div>
+            <div class="mock-listing-text">
+              <div class="mock-text-line"></div>
+              <div class="mock-text-line medium"></div>
+            </div>
+            <div class="mock-pill">
+              <div class="mock-pill-brand">
+                <span class="mock-pill-name"><span class="a">Teo</span><span class="b">Verified</span></span>
+                <span class="mock-pill-sub">Workspace Ready</span>
+              </div>
+              <div class="mock-pill-conn">
+                <div class="mock-pill-speed">
+                  <span class="mock-pill-val">385</span>
+                  <span class="mock-pill-unit">Mbps</span>
+                </div>
+                <span class="mock-pill-tier">Power</span>
+              </div>
+              <div class="mock-pill-amenities">
+                <div class="mock-pill-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8"/></svg></div>
+                <div class="mock-pill-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+                <div class="mock-pill-ico" style="background:rgba(0,136,161,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#0088A1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="3.5" rx="1.5"/><rect x="8" y="5.5" width="8" height="7.5" rx="1.5"/><rect x="7" y="13" width="10" height="3.5" rx="1.2"/></svg></div>
+                <span class="mock-pill-more">+3</span>
+              </div>
+              <div class="mock-pill-chev">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <!-- REAL BADGE FROM TOP THROUGH FIRST AMENITY ROW, SCALED + FADED -->
+            <div class="badge-scaler left">
+              <div class="badge-scaler-inner">
+                <div class="badge-hdr">
+                  <div>
+                    <div class="badge-eyebrow">Verification Overview</div>
+                    <div class="badge-title">Sunset View Studio</div>
+                    <div class="badge-meta">TeoVerified · Valid until <span class="js-today-date">today</span></div>
+                  </div>
+                  <button type="button" class="badge-close" aria-label="Close">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                      <line x1="6" y1="6" x2="18" y2="18"/>
+                      <line x1="18" y1="6" x2="6" y2="18"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="includes-row">
+                  <span class="includes-lbl">This workspace includes</span>
+                  <span class="includes-count">4 of 6 verified</span>
+                </div>
+                <div class="amenity-grid">
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8"/></svg></div>
+                      <span class="ab teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                    </div>
+                    <div class="amenity-name">Dedicated Office</div>
+                  </div>
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+                      <span class="ab teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                    </div>
+                    <div class="amenity-name">External Monitor</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Image upload -->
+        <div class="install-card">
+          <div class="install-head">
+            <div class="install-eyebrow">Image upload</div>
+            <div class="install-title">A dedicated verification zone.</div>
+            <p class="install-desc">Upload the badge as an image and place it on your listing page — sidebar, header, or its own section. Self-updating, no code required.</p>
+          </div>
+          <div class="install-mockup">
+            <div class="mock-listing-head">
+              <div class="mock-listing-title">Sunset View Studio</div>
+              <div class="mock-listing-loc">Half Moon Bay, CA</div>
+            </div>
+            <div class="mock-cover"></div>
+            <div class="mock-listing-text">
+              <div class="mock-text-line"></div>
+              <div class="mock-text-line medium"></div>
+            </div>
+
+            <!-- REAL BADGE FROM "THIS WORKSPACE INCLUDES" DOWNWARD, SCALED -->
+            <div class="badge-scaler right">
+              <div class="badge-scaler-inner">
+                <div class="includes-row">
+                  <span class="includes-lbl">This workspace includes</span>
+                  <span class="includes-count">4 of 6 verified</span>
+                </div>
+                <div class="amenity-grid">
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(118,177,196,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#76B1C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11L12 4L21 11L21 21L3 21Z"/><rect x="9" y="11" width="6" height="4.5" rx="0.8"/></svg></div>
+                      <span class="ab teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                    </div>
+                    <div class="amenity-name">Dedicated Office</div>
+                  </div>
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(167,139,250,0.15)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="13" rx="1.5"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+                      <span class="ab teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                    </div>
+                    <div class="amenity-name">External Monitor</div>
+                  </div>
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(0,136,161,0.14)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#0088A1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="3.5" rx="1.5"/><rect x="8" y="5.5" width="8" height="7.5" rx="1.5"/></svg></div>
+                      <span class="ab host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                    </div>
+                    <div class="amenity-name">Ergonomic Chair</div>
+                  </div>
+                  <div class="amenity-card">
+                    <div class="amenity-top">
+                      <div class="amenity-ico" style="background:rgba(249,115,22,0.16)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="6" rx="1.5"/></svg></div>
+                      <span class="ab host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                    </div>
+                    <div class="amenity-name">Power Strip</div>
+                  </div>
+                </div>
+                <div class="legend">
+                  <div class="legend-row">
+                    <span class="ab teo"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>TEO</span>
+                    <span class="legend-txt">Independently verified by TeoVerified</span>
+                  </div>
+                  <div class="legend-row">
+                    <span class="ab host"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>HOST</span>
+                    <span class="legend-txt">Reported by the property host</span>
+                  </div>
+                </div>
+                <div class="div-line"></div>
+                <div class="conn-row">
+                  <span class="conn-icon">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20">
+                      <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                      <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                      <line x1="12" y1="20" x2="12.01" y2="20"/>
+                    </svg>
+                  </span>
+                  <div class="conn-main">
+                    <span class="conn-speed">385</span>
+                    <span class="conn-unit">Mbps</span>
+                    <span class="conn-chip power">Power</span>
+                  </div>
+                  <div class="conn-right">
+                    <div class="conn-dot"></div>
+                    <span class="conn-date">Tested today</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PRICING ── -->
+    <section class="section" id="pricing">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-num">05</span>
+          Pricing
+        </div>
+        <h2 class="section-h2">One credential. <em>Founding-host rates.</em></h2>
+      </div>
+
+      <div class="pricing-wrap">
+        <div class="pricing-side">
+          <div class="value-blocks">
+            <div class="value-block">
+              <div class="value-block-eyebrow">The math</div>
+              <p class="value-block-text">One extra booking from a guest who trusted the credential and your year is paid for. Probably more than once.</p>
+            </div>
+            <div class="value-block">
+              <div class="value-block-eyebrow">The stack</div>
+              <p class="value-block-text">Channel manager. Dynamic pricing. Analytics. Insurance. You already pay to run your business well. At $39/month effective, TeoVerified is the smallest line on the receipt &mdash; and the only one your guests actually see.</p>
+            </div>
+            <div class="value-block">
+              <div class="value-block-eyebrow">The premium</div>
+              <p class="value-block-text">Direct-booking already commands a premium over OTA listings. A verified credential is what lets you defend it &mdash; with proof, not just photos.</p>
+            </div>
+          </div>
+
+          <h3>Early access, <em>real product.</em></h3>
+          <p>Early access is open to a limited number of hosts. Onboard with us early and lock in founding-host pricing as we grow.</p>
+          <div class="small"><em>General access pricing at launch will be $588 / year. Founding hosts keep $468 — locked, never increases.</em></div>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tag">
+            <span class="pricing-tag-dot"></span>
+            Early access
+          </div>
+
+          <div class="pricing-hero">
+            <div class="pricing-amount">
+              <span class="pricing-num">$468</span>
+              <span class="pricing-per">/ year</span>
+            </div>
+            <div class="pricing-tagline">Founding-host rate, locked. Works out to $39 / month.</div>
+            <div class="pricing-alt">Prefer monthly? <strong>$59 / mo</strong> &mdash; cancel anytime.</div>
+          </div>
+
+          <div class="pricing-setup">
+            <span class="pricing-setup-bold">+ $109 one-time activation</span>
+            <span class="pricing-setup-sub">— setup and first verification</span>
+          </div>
+
+          <ul class="pricing-features">
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+              Independent verification of internet performance
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+              Workspace and essentials verified or self-reported
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+              Embeddable pill + downloadable badge image
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+              Dashboard for retests, updates, and amenity changes
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.5l3 3 6-6"/></svg>
+              Founding-host rate locked — never increases for you
+            </li>
+          </ul>
+
+          <!--
+            EARLY-ACCESS REQUEST FORM
+            ─────────────────────────
+            v1: posts to Formspree (no backend needed).
+
+            ▸ TO SET UP:
+              1. Create a free account at https://formspree.io
+              2. Create a new form, copy your endpoint URL (e.g. https://formspree.io/f/xyzabc12)
+              3. Replace REPLACE_WITH_YOUR_FORMSPREE_ID below with your endpoint ID
+              4. (Optional) Set up email forwarding inside Formspree to your team inbox
+
+            ▸ TO MIGRATE TO BREVO LATER:
+              When you're ready to use Brevo, build a serverless function (e.g. a
+              Vercel/Netlify API route) that accepts this form's POST, calls Brevo's
+              transactional email API server-side (so your API key isn't exposed),
+              and returns a 200/error response. Then change the `action` attribute
+              below to point at your serverless endpoint instead of Formspree.
+
+              Form field names below (name, email, listing, notes) are what your
+              backend will receive — keep them consistent or update both sides.
+          -->
+          <form
+            class="signup-form"
+            action="https://formspree.io/f/xgoqgojl"
+            method="POST"
+            id="early-access-form"
+            novalidate
+          >
+            <div class="signup-form-intro">Get on the list</div>
+            <p class="signup-form-disarm">Tell us about your stay. We'll send updates as we open up access &mdash; and you can decide anytime if you're in.</p>
+
+            <div class="signup-field">
+              <label class="signup-label" for="ea-name">Name</label>
+              <input
+                class="signup-input"
+                type="text"
+                id="ea-name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Your name"
+              >
+            </div>
+
+            <div class="signup-field">
+              <label class="signup-label" for="ea-email">Email</label>
+              <input
+                class="signup-input"
+                type="email"
+                id="ea-email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="you@example.com"
+              >
+            </div>
+
+            <div class="signup-field">
+              <label class="signup-label" for="ea-listing">Listing URL or property name</label>
+              <input
+                class="signup-input"
+                type="text"
+                id="ea-listing"
+                name="listing"
+                required
+                autocomplete="url"
+                placeholder="https://your-direct-booking-site.com"
+              >
+            </div>
+
+            <div class="signup-field">
+              <label class="signup-label signup-label-optional" for="ea-notes">Tell us about your stay <span>(optional)</span></label>
+              <textarea
+                class="signup-input signup-textarea"
+                id="ea-notes"
+                name="notes"
+                rows="3"
+                placeholder="What makes your stay worth verifying?"
+              ></textarea>
+            </div>
+
+            <!-- Honeypot field — bots fill it, humans don't see it.
+                 Cuts spam without adding a captcha. -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+            <button type="submit" class="btn btn-primary signup-submit" id="ea-submit">
+              <span class="signup-submit-default">Get on the list</span>
+              <span class="signup-submit-sending">Sending&hellip;</span>
+            </button>
+
+            <div class="signup-error" id="ea-error" role="alert" aria-live="polite"></div>
+
+            <p class="signup-privacy">By signing up, you agree we may email you about TeoVerified updates. We don't sell your info, ever.</p>
+          </form>
+
+          <!-- Thank-you state — shown after a successful submit. -->
+          <div class="signup-thanks" id="ea-thanks" hidden>
+            <div class="signup-thanks-mark" aria-hidden="true">
+              <svg aria-hidden="true" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="13"/>
+                <path d="M10 16.5l4 4 8-9"/>
+              </svg>
+            </div>
+            <div class="signup-thanks-title">You're on the list.</div>
+            <p class="signup-thanks-text">We'll keep you in the loop as access opens up. Reply anytime &mdash; or stay quiet until you're ready.</p>
+          </div>
+
+          <div class="pricing-reassurance">Save $240 a year vs. monthly. No surprises.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 06 · BUILT TO BE READ ── -->
+    <section class="section section-dark" id="signals">
+      <div class="signals-stage">
+        <div class="section-header signals-header">
+          <div class="section-eyebrow section-eyebrow-dark">
+            <span class="section-eyebrow-num">06</span>
+            The signal layer
+          </div>
+          <h2 class="section-h2 section-h2-dark">Built to be read — by <em>everyone</em>.</h2>
+          <p class="section-p section-p-dark">Your verification isn't just a badge on your listing. It's structured, AI-readable proof — a clean signal that search engines, AI travel agents, hosts, and guests can use to understand what your property actually offers.</p>
+        </div>
+
+        <!-- Diagram: one credential → five readers -->
+        <div class="signals-diagram">
+          <div class="signals-source">
+            <div class="signals-source-eyebrow">One credential</div>
+            <div class="signals-source-mark">
+              <svg viewBox="0 0 32 32" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="16" cy="16" r="13"/>
+                <path d="M10 16.5l4 4 8-9"/>
+              </svg>
+              <span>TeoVerified</span>
+            </div>
+          </div>
+
+          <div class="signals-fan" aria-hidden="true">
+            <svg aria-hidden="true" viewBox="0 0 600 80" preserveAspectRatio="none" width="100%" height="60">
+              <path d="M300,0 C300,30 120,40 90,80" stroke="rgba(45,212,191,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="3 4"/>
+              <path d="M300,0 C300,30 240,40 230,80" stroke="rgba(45,212,191,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="3 4"/>
+              <path d="M300,0 C300,30 360,40 370,80" stroke="rgba(45,212,191,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="3 4"/>
+              <path d="M300,0 C300,30 480,40 510,80" stroke="rgba(45,212,191,0.35)" stroke-width="1.5" fill="none" stroke-dasharray="3 4"/>
+            </svg>
+          </div>
+
+          <div class="signals-readers">
+            <div class="signals-reader">
+              <div class="signals-reader-ico">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.5" y2="16.5"/>
+                </svg>
+              </div>
+              <div class="signals-reader-name">Search engines</div>
+              <div class="signals-reader-sub">Indexable, structured data</div>
+            </div>
+            <div class="signals-reader">
+              <div class="signals-reader-ico">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="4" y="6" width="16" height="14" rx="2"/>
+                  <circle cx="9" cy="13" r="1.2"/>
+                  <circle cx="15" cy="13" r="1.2"/>
+                  <line x1="12" y1="2" x2="12" y2="6"/>
+                  <line x1="9" y1="17" x2="15" y2="17"/>
+                </svg>
+              </div>
+              <div class="signals-reader-name">AI agents</div>
+              <div class="signals-reader-sub">Travel assistants &amp; LLMs</div>
+            </div>
+            <div class="signals-reader">
+              <div class="signals-reader-ico">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 12l9-8 9 8"/>
+                  <path d="M5 10v10h14V10"/>
+                  <path d="M10 20v-6h4v6"/>
+                </svg>
+              </div>
+              <div class="signals-reader-name">Hosts</div>
+              <div class="signals-reader-sub">Your dashboard &amp; site embeds</div>
+            </div>
+            <div class="signals-reader">
+              <div class="signals-reader-ico">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="8" r="4"/>
+                  <path d="M4 21c0-4 4-7 8-7s8 3 8 7"/>
+                </svg>
+              </div>
+              <div class="signals-reader-name">Guests</div>
+              <div class="signals-reader-sub">Visible on your listing</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="signals-tagline">One credential. <em>Every channel.</em></p>
+      </div>
+    </section>
+
+    </main>
+
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-block">
+          <a href="#" class="brand">
+            <span class="brand-wordmark"><span class="bw-prefix">Teo</span><span class="bw-suffix">Verified</span><span class="bw-dot">.</span></span>
+          </a>
+          <p class="footer-tagline">Independent verification for the amenities your guests rely on. Built for direct-booking hosts and work-capable stays.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#badge">The badge</a>
+          <a href="#stays">What's verified</a>
+          <a href="#how">How it works</a>
+          <a href="#install">Install</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#badge">Sample verification</a>
+          <a href="mailto:hello@teoverified.com?subject=Privacy%20question">Privacy</a>
+          <a href="mailto:hello@teoverified.com?subject=Terms%20question">Terms</a>
+          <a href="mailto:hello@teoverified.com?subject=Accessibility%20feedback">Accessibility</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 TeoVerified. All rights reserved.</span>
+        <div class="footer-bottom-r">
+          <span class="pp">Patent Pending</span>
+          <span>teoverified.com</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // Always display today's actual date wherever a .js-today-date span appears.
+  (function setTodayDate() {
+    var today = new Date();
+    var formatted = today.toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    });
+    document.querySelectorAll('.js-today-date').forEach(function (el) {
+      el.textContent = formatted;
+    });
+  })();
+
+  function toggleDetails(btn) {
+    const panel = document.getElementById('detailsPanel');
+    const icon  = document.getElementById('toggleIcon');
+    const label = btn.querySelector('.toggle-lbl');
+    const open  = panel.classList.contains('open');
+    panel.classList.toggle('open', !open);
+    icon.classList.toggle('open', !open);
+    label.textContent = open ? 'Show technical details' : 'Hide technical details';
+    btn.setAttribute('aria-expanded', String(!open));
+  }
+
+  // ───── Early-access form: AJAX submit with loading / success / error states ─────
+  (function setupEarlyAccessForm() {
+    var form = document.getElementById('early-access-form');
+    if (!form) return;
+
+    var submitBtn   = document.getElementById('ea-submit');
+    var errorBox    = document.getElementById('ea-error');
+    var thanksPanel = document.getElementById('ea-thanks');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      errorBox.textContent = '';
+
+      // Native browser validation — only flag invalid styling AFTER first submit attempt.
+      form.classList.add('was-validated');
+      if (!form.checkValidity()) {
+        var firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      // Confirm the form action has actually been wired up before submitting.
+      // If you see this error, you haven't replaced REPLACE_WITH_YOUR_FORMSPREE_ID yet.
+      if (form.action.indexOf('REPLACE_WITH_YOUR_FORMSPREE_ID') !== -1) {
+        errorBox.textContent = 'Form endpoint not yet configured. (See the TODO comment in the HTML.)';
+        return;
+      }
+
+      submitBtn.disabled = true;
+
+      var data = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (response) {
+          if (response.ok) {
+            // Success — hide the form, show the thank-you panel.
+            form.hidden = true;
+            thanksPanel.hidden = false;
+            // Scroll the thank-you mark into view if the form was tall enough to push it offscreen.
+            thanksPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            return response.json().then(function (body) {
+              throw new Error(
+                body && body.errors && body.errors.length
+                  ? body.errors.map(function (er) { return er.message; }).join(', ')
+                  : 'Something went wrong. Please try again.'
+              );
+            });
+          }
+        })
+        .catch(function (err) {
+          errorBox.textContent = err.message || 'Couldn\u2019t send your request. Please try again, or email us directly.';
+          submitBtn.disabled = false;
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -2489,6 +2489,14 @@
     }
     .signup-error:empty { display: none; }
 
+    .signup-privacy {
+      font-size: 11.5px;
+      color: var(--badge-mute);
+      line-height: 1.5;
+      margin: 6px 0 0;
+      text-align: center;
+    }
+
     /* Thank-you state — replaces the form on successful submit. */
     .signup-thanks {
       display: flex;
@@ -3580,6 +3588,8 @@
             </button>
 
             <div class="signup-error" id="ea-error" role="alert" aria-live="polite"></div>
+
+            <p class="signup-privacy">By signing up, you agree we may email you about TeoVerified updates. We don't sell your info, ever.</p>
           </form>
 
           <!-- Thank-you state — shown after a successful submit. -->
@@ -3709,10 +3719,10 @@
         </div>
         <div class="footer-col">
           <h4>Company</h4>
-          <a href="#">Sample verification</a>
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Accessibility</a>
+          <a href="#badge">Sample verification</a>
+          <a href="mailto:hello@teoverified.com?subject=Privacy%20question">Privacy</a>
+          <a href="mailto:hello@teoverified.com?subject=Terms%20question">Terms</a>
+          <a href="mailto:hello@teoverified.com?subject=Accessibility%20feedback">Accessibility</a>
         </div>
       </div>
       <div class="footer-bottom">
